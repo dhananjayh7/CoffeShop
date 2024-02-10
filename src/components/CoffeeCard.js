@@ -8,7 +8,7 @@ import BGIcon from './BGIcon'
 const CARD_WIDTH = Dimensions.get('window').width*0.23
 
 const CoffeeCard = ({name, id, index, type, rosted, imagelink_square, special_ingredient, average_rating, price, buttonPressHandler}) => {
-    console.log('first,',name)
+    // console.log('first,',name)
   return (
     <LinearGradient
       start={{x:0, y:0}}
@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
   CarLinearGradCont:{
     padding:Spacing.space_15,
     borderRadius:BORDERRADIUS.radius_25,
+    // justifyContent:'center',
+    // alignItems:'center'
 
   },
   CardImageBG:{

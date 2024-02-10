@@ -19,9 +19,9 @@ const TabNavigator = () => {
             tabBarHideOnKeyboard:true,
             tabBarShowLabel:false,
             tabBarStyle:styles.tabBarStyle,
-            tabBarBackground:()=>{
-                <BlurView overlayColor='' blurAmount={15} style={styles.blurViewStyle}/>
-            }
+            tabBarBackground:()=>(
+                <BlurView overlayColor='' blurAmount={20} style={styles.blurViewStyle}/>
+            )
         }}
     >
       <Tab.Screen name='Home' component={HomeScreen} options={{
