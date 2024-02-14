@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Dimensions, FlatList, ScrollView, StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { useStore } from '../store/store'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
@@ -32,6 +32,9 @@ const getCoffee = (category, data) =>{
 const HomeScreen = ({navigation}) => {
   const CoffeeList = useStore((state) => state.CoffeeList)
   const BeanList = useStore((state) => state.BeanList)
+  const addToCart = useStore((state) => state.addToCart)
+  const calculateCartPrice = useStore((state) => state.calculateCartPrice)
+
   const [categories, setCategories] = useState(getCategoriesFromData(CoffeeList))
   const [searchText, setSearchText] = useState('');
   const [categoryIndex, setCategoryIndex] = useState({
@@ -53,6 +56,22 @@ const HomeScreen = ({navigation}) => {
         ),
       ]);
     }
+  }
+
+  const CoffeeCardAddToCart = (data) =>{
+    console.log('data',data)
+    addToCart({
+        id: data.id, 
+        index: data.index, 
+        name:data.name, 
+        roasted:data.roasted, 
+        imagelink_square :data.imagelink_square, 
+        special_ingredient: data.special_ingredient, 
+        type: data.type, 
+        prices: data.prices,
+      })
+    calculateCartPrice();
+    ToastAndroid.showWithGravity(`${data.name} is Added to Cart`, ToastAndroid.SHORT, ToastAndroid.CENTER)
   }
 
   const resetSearchCoffee = () =>{
@@ -153,12 +172,12 @@ const HomeScreen = ({navigation}) => {
                   id = {item.id}
                   index = {item.index}
                   type =  {item.type}
-                  rosted = {item.rosted}
+                  roasted = {item.roasted}
                   imagelink_square = {item.imagelink_square }
                   special_ingredient= {item.special_ingredient}
                   average_rating = {item.average_rating} 
                   price = {item.prices[2]}
-                  buttonPressHandler = {()=>{}}
+                  buttonPressHandler = {CoffeeCardAddToCart}
                />
             </TouchableOpacity>
             )

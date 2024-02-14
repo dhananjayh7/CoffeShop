@@ -6,7 +6,7 @@ import ImageBackGroundInfo from '../components/ImageBackGroundInfo'
 import PaymentFooter from '../components/PaymentFooter'
 
 const DetailsScreen = ({navigation, route}) => {
-  console.log('route', route.params)
+  // console.log('route', route.params)
   const ItemOfIndex = useStore((state) =>
     route.params.type == 'Coffee'? state.CoffeeList : state.BeanList
   )[route.params.index];
@@ -15,6 +15,7 @@ const DetailsScreen = ({navigation, route}) => {
   const [fullDesc, setFullDesk] = useState(false)
   const [price, setPrice] = useState(ItemOfIndex.prices[0])
   const addToCart = useStore((state) => state.addToCart)
+  const calculateCartPrice = useStore((state) => state.calculateCartPrice)
   const backHandler = () =>{
     navigation.pop()
   }
@@ -23,8 +24,19 @@ const DetailsScreen = ({navigation, route}) => {
     favourite? deleteFromFavorite(type, id): addToFavoriteList(type, id);
   }
   
-  const addToCartHandle = (id, index, name, roaste, ImageLinkSquare, special_ingredient, type, price) =>{
-    
+  const addToCartHandle = (data) =>{
+    addToCart({
+        id: data.id, 
+        index: data.index, 
+        name:data.name, 
+        roasted:data.roasted, 
+        imagelink_square :data.imagelink_square, 
+        special_ingredient: data.special_ingredient, 
+        type: data.type, 
+        prices: [{...price, quantity:1 }],
+      })
+    calculateCartPrice();
+    navigation.navigate('Cart')
   }
   return (
     <View style={styles.screenContainer}>
@@ -83,7 +95,18 @@ const DetailsScreen = ({navigation, route}) => {
         <PaymentFooter 
           price={price}
           
-          buttonPressHandler={()=>{}}
+          buttonPressHandler={()=>{
+            addToCartHandle({
+              id: ItemOfIndex.id, 
+              index: ItemOfIndex.index, 
+              name: ItemOfIndex.name, 
+              roasted: ItemOfIndex.roasted, 
+              imagelink_square: ItemOfIndex.imagelink_square, 
+              special_ingredient: ItemOfIndex.special_ingredient, 
+              type: ItemOfIndex.type, 
+              price: price,
+            })
+          }}
           buttonTitle = {'Add to Cart'}
         />
       </ScrollView>

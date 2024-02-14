@@ -7,7 +7,7 @@ import BGIcon from './BGIcon'
 
 const CARD_WIDTH = Dimensions.get('window').width*0.23
 
-const CoffeeCard = ({name, id, index, type, rosted, imagelink_square, special_ingredient, average_rating, price, buttonPressHandler}) => {
+const CoffeeCard = ({name, id, index, type, roasted, imagelink_square, special_ingredient, average_rating, price, buttonPressHandler}) => {
     // console.log('first,',name)
   return (
     <LinearGradient
@@ -28,7 +28,16 @@ const CoffeeCard = ({name, id, index, type, rosted, imagelink_square, special_in
       <Text style={styles.cardSubTitle}>{special_ingredient}</Text>
       <View style={styles.CardFooterRow}>
         <Text style={styles.cardPriceCurrency}> $ <Text style={styles.cardPrice}>{price.price}</Text></Text>
-        <TouchableOpacity onPress={()=>{}}>
+        <TouchableOpacity onPress={()=>{buttonPressHandler({
+                    id: id, 
+                    index: index, 
+                    name: name, 
+                    roasted: roasted, 
+                    imagelink_square : imagelink_square, 
+                    special_ingredient: special_ingredient, 
+                    type: type, 
+                    prices: [{...price, quantity:1}],
+                  })}}>
           <BGIcon 
             color= {COLORS.primaryWhiteHex}
             name= {'add'}
