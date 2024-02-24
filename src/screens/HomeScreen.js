@@ -209,7 +209,7 @@ const HomeScreen = ({navigation}) => {
                   special_ingredient= {item.special_ingredient}
                   average_rating = {item.average_rating} 
                   price = {item.prices[2]}
-                  buttonPressHandler = {()=>{}}
+                  buttonPressHandler = {CoffeeCardAddToCart}
                />
             </TouchableOpacity>
             )

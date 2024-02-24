@@ -140,7 +140,7 @@ export const useStore = create(
                                 if(state.CartList[i].prices[j].quantity>1){
                                     state.CartList[i].prices[j].quantity--;
                                 }else{
-                                    state.CartList[i].prices.splice(i,1); 
+                                    state.CartList.splice(i,1); 
                                 }
                             }
                             break;

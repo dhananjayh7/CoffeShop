@@ -6,7 +6,7 @@ import ImageBackGroundInfo from '../components/ImageBackGroundInfo'
 import PaymentFooter from '../components/PaymentFooter'
 
 const DetailsScreen = ({navigation, route}) => {
-  // console.log('route', route.params)
+  console.log('route', route.params)
   const ItemOfIndex = useStore((state) =>
     route.params.type == 'Coffee'? state.CoffeeList : state.BeanList
   )[route.params.index];

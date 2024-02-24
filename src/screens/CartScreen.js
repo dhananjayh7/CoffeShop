@@ -14,11 +14,19 @@ const CartScreen = ({navigation, route}) => {
   const incrementCart_itm_qty = useStore((state) => state.incrementCart_itm_qty)
   const decrementCart_itm_qty = useStore((state) => state.decrementCart_itm_qty)
   const calculateCartPrice = useStore((state) => state.calculateCartPrice)
-console.log('length',CartList.length)
   const tabBarHeight = useBottomTabBarHeight()
 
   const PayHandle = () =>{
-    navigation.push('Payment')
+    navigation.push('Payment',{amount: CartPrice})
+  }
+  const incrementCartItmQtyHandle = (id, size) =>{
+    incrementCart_itm_qty(id, size);
+    calculateCartPrice();
+  }
+  const decrementCartItmQtyHandle = (id, size) =>{
+    decrementCart_itm_qty(id, size);
+    calculateCartPrice();
+
   }
   return (
     <View style={styles.screenContainer}> 
@@ -40,7 +48,13 @@ console.log('length',CartList.length)
                   CartList.map((data) =>(
                     <TouchableOpacity 
                       key={data.id }
-                      onPress={()=>{}}>
+                      onPress={()=>{
+                        navigation.push('Details',{
+                          index: data.index,
+                          id: data.id,
+                          type: data.type,
+                        })
+                      }}>
                         <CartItem 
                           id = {data.id} 
                           name = {data.name} 
@@ -49,8 +63,8 @@ console.log('length',CartList.length)
                           roasted = {data.roasted}
                           prices = {data.prices}
                           type = {data.type}
-                          incrementCartItmQtyHandle ={()=>{}}
-                          decrementCartItmQtyHandle = {()=>{}}
+                          incrementCartItmQtyHandle ={incrementCartItmQtyHandle}
+                          decrementCartItmQtyHandle = {decrementCartItmQtyHandle}
                         />
                     </TouchableOpacity>
                   ))
