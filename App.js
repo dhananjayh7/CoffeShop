@@ -5,11 +5,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './src/navigators/TabNavigator';
 import SplashScreen from 'react-native-splash-screen';
+import { Platform } from 'react-native';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
   useEffect(() => {
-    SplashScreen.hide()
+    if(Platform.OS=='android'){
+      SplashScreen.hide();
+    }
   }, [])
   
   return (

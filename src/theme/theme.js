@@ -130,8 +130,11 @@
 //   radius_25: 25,
 // };
 export const Spacing = {
+    space_1: 1,
     space_2: 2,
     space_4: 4,
+    space_5: 5,
+    space_6: 6,
     space_8: 8,
     space_10: 10,
     space_12: 12,
@@ -174,6 +177,9 @@ export const Spacing = {
   };
   
   export const FONTSIZE = {
+    size_2: 1.5,
+    size_3:3,
+    size_4: 4,
     size_8: 8,
     size_10: 10,
     size_12: 12,

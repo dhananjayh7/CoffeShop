@@ -3,6 +3,7 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, Spacing } from '../theme/theme'
 import CustomIcons from './CustomIcons'
+import { responsiveFontSize, responsiveScreenHeight, responsiveHeight,responsiveWidth } from 'react-native-responsive-dimensions';
 
 const GradientBGIcon = ({name, color, size}) => {
   return (
@@ -31,8 +32,8 @@ const styles = StyleSheet.create({
         overflow:'hidden',
     },
     LinearGradientBG:{
-        height:Spacing.space_36,
-        width: Spacing.space_36,
+        height: responsiveHeight(Spacing.space_5),
+        width: responsiveWidth(Spacing.space_10),
         alignItems:'center',
         justifyContent:'center',
     }

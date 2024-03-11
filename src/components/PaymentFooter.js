@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, Spacing } from '../theme/theme'
+import { responsiveFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions'
 
 const PaymentFooter = ({price, buttonPressHandler, buttonTitle}) => {
   return (
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     },
     buttonText:{
         fontFamily: FONTFAMILY.poppins_semibold,
-        fontSize: FONTSIZE.size_18,
+        fontSize: responsiveFontSize(2),
         color: COLORS.primaryWhiteHex
     }
 })

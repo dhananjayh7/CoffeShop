@@ -1,9 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Platform, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { COLORS, FONTFAMILY, FONTSIZE, Spacing } from '../theme/theme'
 import GradientBGIcon from './GradientBGIcon'
 import ProfilePic from './ProfilePic';
-
+import { responsiveFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions';
 // const headerBarProps {
 //     title
 // }
@@ -19,14 +19,15 @@ const HeaderBar = ({title}) => {
 
 const styles = StyleSheet.create({
     HeaderContainer:{
-        padding: Spacing.space_30,
+        padding: responsiveScreenWidth(Spacing.space_6),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
+        // marginTop: Platform.OS=="android"?0:'5%'
     },
     HeaderText:{
         fontFamily:FONTFAMILY.poppins_semibold,
-        fontSize: FONTSIZE.size_20,
+        fontSize: responsiveFontSize(FONTSIZE.size_3),
         color:COLORS.primaryWhiteHex,
     }
 })

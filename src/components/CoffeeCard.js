@@ -4,8 +4,9 @@ import LinearGradient from 'react-native-linear-gradient'
 import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, Spacing } from '../theme/theme'
 import CustomIcons from './CustomIcons'
 import BGIcon from './BGIcon'
+import { responsiveFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions'
 
-const CARD_WIDTH = Dimensions.get('window').width*0.23
+const CARD_WIDTH = Dimensions.get('window').width*0.27
 
 const CoffeeCard = ({name, id, index, type, roasted, imagelink_square, special_ingredient, average_rating, price, buttonPressHandler}) => {
     // console.log('first,',name)
@@ -16,11 +17,13 @@ const CoffeeCard = ({name, id, index, type, roasted, imagelink_square, special_i
       style={styles.CarLinearGradCont}
       colors={[COLORS.primaryGreyHex, COLORS.primaryBlackHex]}
     >
+      
       <ImageBackground  source={imagelink_square} style={styles.CardImageBG} resizeMode='cover'>
         <View style={styles.cardRatingContainer}>
           <CustomIcons name='star' 
               color={COLORS.primaryOrangeHex} 
-              size={FONTSIZE.size_16}/>
+              style={{marginLeft:2}}
+              size={responsiveFontSize(1.5)}/>
           <Text style={styles.cardRatingText}>{average_rating}</Text>
         </View>
       </ImageBackground>
@@ -28,7 +31,8 @@ const CoffeeCard = ({name, id, index, type, roasted, imagelink_square, special_i
       <Text style={styles.cardSubTitle}>{special_ingredient}</Text>
       <View style={styles.CardFooterRow}>
         <Text style={styles.cardPriceCurrency}> $ <Text style={styles.cardPrice}>{price.price}</Text></Text>
-        <TouchableOpacity onPress={()=>{buttonPressHandler({
+        <TouchableOpacity 
+              onPress={()=>{buttonPressHandler({
                     id: id, 
                     index: index, 
                     name: name, 
@@ -42,7 +46,7 @@ const CoffeeCard = ({name, id, index, type, roasted, imagelink_square, special_i
             color= {COLORS.primaryWhiteHex}
             name= {'add'}
             BGColor= {COLORS.primaryOrangeHex}
-            size= {FONTSIZE.size_10}
+            size= {responsiveFontSize(FONTSIZE.size_2)}
           />
         </TouchableOpacity>
       </View>
@@ -63,7 +67,8 @@ const styles = StyleSheet.create({
     height : CARD_WIDTH,
     borderRadius : BORDERRADIUS.radius_20,
     marginBottom : Spacing.space_15,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    alignSelf:'center',
   },
   cardRatingContainer:{
     flexDirection:'row',
@@ -82,17 +87,20 @@ const styles = StyleSheet.create({
     fontFamily:FONTFAMILY.poppins_medium,
     color:COLORS.primaryWhiteHex,
     lineHeight:22,
-    fontSize:FONTSIZE.size_14,
+    fontSize:responsiveFontSize(FONTSIZE.size_2),
   },
   cardTitle:{
     fontFamily:FONTFAMILY.poppins_medium,
     color:COLORS.primaryWhiteHex,
-    fontSize:FONTSIZE.size_16,
+    fontSize:responsiveFontSize(1.8),
+    alignSelf:'center',
+
   },
   cardSubTitle:{
     fontFamily:FONTFAMILY.poppins_light,
     color:COLORS.primaryWhiteHex,
-    fontSize:FONTSIZE.size_10,
+    alignSelf:'center',
+    fontSize:responsiveFontSize(1.2),
   },
   CardFooterRow:{
     flexDirection:'row',
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
   cardPriceCurrency:{
     fontFamily:FONTFAMILY.poppins_semibold,
     color:COLORS.primaryOrangeHex,
-    fontSize:FONTSIZE.size_18,
+    fontSize: responsiveFontSize(2.1),
   }, 
   cardPrice:{
     color:COLORS.primaryWhiteHex,

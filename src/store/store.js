@@ -21,7 +21,7 @@ export const useStore = create(
                     if(state.CartList[i].id == cartItem.id){
                         found = true;
                         let size = false;
-                        console.log('cart list',state.CartList[i])
+                        // console.log('cart list',state.CartList[i])
                         for(let j = 0; j< state.CartList[i].prices.length; j++){
                             if(state.CartList[i].prices[j].size == cartItem.prices[0]){
                                 size = true;

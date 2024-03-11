@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, ScrollView, StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
+import { Dimensions, FlatList, Platform, ScrollView, StatusBar, StyleSheet, Text, TextInput, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { useStore } from '../store/store'
 import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs'
@@ -6,6 +6,8 @@ import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, Spacing } from '../theme/th
 import HeaderBar from '../components/HeaderBar'
 import CustomIcons from '../components/CustomIcons'
 import CoffeeCard from '../components/CoffeeCard'
+import { responsiveFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions'
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context"
 
 const getCategoriesFromData = (data) =>{
   let temp ={}
@@ -21,15 +23,16 @@ const getCategoriesFromData = (data) =>{
   return categories;
 }
 const getCoffee = (category, data) =>{
-   if(category == "All"){
+  if(category == "All"){
     return data;
-   }else{
+  }else{
     let cofeelist = data.filter((item) => item.name == category);
     return cofeelist;
-   }
+  }
 }
 
 const HomeScreen = ({navigation}) => {
+  const insets = useSafeAreaInsets()
   const CoffeeList = useStore((state) => state.CoffeeList)
   const BeanList = useStore((state) => state.BeanList)
   const addToCart = useStore((state) => state.addToCart)
@@ -84,8 +87,21 @@ const HomeScreen = ({navigation}) => {
     setSearchText('')
   }
   return (
+    <SafeAreaProvider>
     <View style={styles.screenContainer}>
+      <View style={{height: insets.top}}>
+    <StatusBar backgroundColor={COLORS.primaryBlackHex}/>
+
+      </View>
+
+    {/* {
+      Platform.OS=="android"?
       <StatusBar backgroundColor={COLORS.primaryBlackHex}/>
+      :
+      <View style={{backgroundColor:COLORS.primaryBlackHex, height:responsiveScreenHeight(3)}}>
+
+      </View>
+    }  */}
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollViewStyle}>
       <HeaderBar title="Home"/>
       <Text style={styles.ScreenTitle}>Find the best{'\n'}coffee for you</Text>
@@ -95,7 +111,7 @@ const HomeScreen = ({navigation}) => {
           <CustomIcons 
             style={styles.CustomIcons}
             name="search" 
-            size = {FONTSIZE.size_18} 
+            size = {responsiveFontSize(2.8)} 
             color = {searchText.length>0? COLORS.primaryOrangeHex:COLORS.primaryGreyHex}/>
         </TouchableOpacity>
           <TextInput 
@@ -217,6 +233,7 @@ const HomeScreen = ({navigation}) => {
         />
       </ScrollView>
     </View>
+    </SafeAreaProvider>
   )
 }
 
@@ -229,14 +246,16 @@ const styles = StyleSheet.create({
     flexGrow:1,
   },
   ScreenTitle:{
-    fontSize:FONTSIZE.size_28,
+    fontSize: responsiveFontSize(FONTSIZE.size_3),
     fontFamily: FONTFAMILY.poppins_semibold,
     color:COLORS.primaryWhiteHex,
     paddingLeft:Spacing.space_30
   },
   SearchInputContainer:{
     flexDirection:'row',
-    margin: Spacing.space_30,
+    marginHorizontal: responsiveScreenWidth(Spacing.space_6),
+    marginVertical:responsiveScreenHeight(Spacing.space_2),
+    marginBottom: responsiveScreenHeight(Spacing.space_4),
     borderRadius: BORDERRADIUS.radius_20,
     backgroundColor: COLORS.primaryDarkGreyHex,
     alignItems:'center',
@@ -249,10 +268,13 @@ const styles = StyleSheet.create({
     height: Spacing.space_20 *3,
     fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.primaryWhiteHex,
+    alignItems:'center',
+    alignContent:'center',
+    
   },
   CategoryScrollViewStyle:{
     paddingHorizontal: Spacing.space_20,
-    marginBottom: Spacing.space_20,
+    marginBottom: responsiveScreenHeight(Spacing.space_1),
   },
   categoryScroolViewContainer:{
     paddingHorizontal: Spacing.space_15

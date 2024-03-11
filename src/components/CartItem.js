@@ -3,6 +3,7 @@ import React from 'react'
 import LinearGradient from 'react-native-linear-gradient'
 import { BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, Spacing } from '../theme/theme'
 import CustomIcons from './CustomIcons'
+import { responsiveFontSize, responsiveScreenHeight, responsiveScreenWidth } from 'react-native-responsive-dimensions'
 
 const CartItem = ({id, name, imagelink_square, special_ingredient, roasted, prices, type, incrementCartItmQtyHandle, decrementCartItmQtyHandle}) => {
   return (
@@ -35,10 +36,10 @@ const CartItem = ({id, name, imagelink_square, special_ingredient, roasted, pric
                             key={index.toString()}>
                                 <View style={styles.cartItmSizeValueContainer}>
                                     <View style={styles.sizeBox}>
-                                        <Text style={[styles.sizeTex,{fontSize: type=='bean'? FONTSIZE.size_12: FONTSIZE.size_16}]}>{data.size}</Text>
+                                        <Text style={[styles.sizeTex,{fontSize: type=='bean'? responsiveFontSize(FONTSIZE.size_12): responsiveFontSize(1.5)}]}>{data.size}</Text>
                                     </View>
-                                    <Text style={styles.sizeCurrency}>{data.currency}
-                                    <Text style={styles.sizePrice}>   {data.price}</Text></Text>
+                                    <Text style={styles.sizeCurrency}>  {data.currency}
+                                    <Text style={styles.sizePrice}> {data.price}</Text></Text>
                                 </View>
                                 <View style={styles.cartItmSizeValueContainer}>
                                     <TouchableOpacity 
@@ -49,7 +50,7 @@ const CartItem = ({id, name, imagelink_square, special_ingredient, roasted, pric
                                         <CustomIcons 
                                             name = 'minus'
                                             color = {COLORS.primaryWhiteHex}
-                                            size = {FONTSIZE.size_10}
+                                            size = {responsiveFontSize(1)}
                                          />
                                     </TouchableOpacity>
                                     <View style={styles.cartItemQty}>
@@ -65,7 +66,7 @@ const CartItem = ({id, name, imagelink_square, special_ingredient, roasted, pric
                                         <CustomIcons 
                                             name = 'add'
                                             color = {COLORS.primaryWhiteHex}
-                                            size = {FONTSIZE.size_10}
+                                            size = {responsiveFontSize(1)}
                                          />
                                     </TouchableOpacity>
                                 </View>
@@ -105,7 +106,7 @@ const CartItem = ({id, name, imagelink_square, special_ingredient, roasted, pric
                                 <CustomIcons 
                                     name = 'minus'
                                     color = {COLORS.primaryWhiteHex}
-                                    size = {FONTSIZE.size_10}
+                                    size = {responsiveFontSize(1)}
                                     />
                             </TouchableOpacity>
                             <View style={styles.cartItemQty}>
@@ -121,7 +122,7 @@ const CartItem = ({id, name, imagelink_square, special_ingredient, roasted, pric
                                 <CustomIcons 
                                     name = 'add'
                                     color = {COLORS.primaryWhiteHex}
-                                    size = {FONTSIZE.size_10}
+                                    size = {responsiveFontSize(1)}
                                     />
                             </TouchableOpacity>
                 </View>
@@ -146,8 +147,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     cartItemImage:{
-        height: 130,
-        width: 130,
+        height: responsiveScreenHeight(18),
+        width: responsiveScreenWidth(35),
         borderRadius:BORDERRADIUS.radius_25
     },
     cartItemnfo:{
@@ -157,12 +158,12 @@ const styles = StyleSheet.create({
     },
     cartItemName:{
         fontFamily: FONTFAMILY.poppins_medium,
-        fontSize: FONTSIZE.size_18,
+        fontSize: responsiveFontSize(2.2),
         color: COLORS.primaryWhiteHex,
     },
     cartItemSpecialIngr:{
         fontFamily: FONTFAMILY.poppins_regular,
-        fontSize: FONTSIZE.size_12,
+        fontSize: responsiveFontSize(FONTSIZE.size_2),
         color: COLORS.secondaryLightGreyHex,
     },
     roastedContainer:{
@@ -194,8 +195,8 @@ const styles = StyleSheet.create({
     },
     sizeBox:{
         backgroundColor:COLORS.primaryBlackHex,
-        height:40,
-        width:100,
+        height:responsiveScreenHeight(5),
+        width:responsiveScreenWidth(20),
         borderRadius:BORDERRADIUS.radius_10,
         justifyContent:'center',
         alignItems:'center'
@@ -214,12 +215,12 @@ const styles = StyleSheet.create({
     },
     cartItemIcon:{
         backgroundColor:COLORS.primaryOrangeHex,
-        padding: Spacing.space_12,
-        borderRadius: BORDERRADIUS.radius_10,
+        padding: responsiveFontSize(1.2),
+        borderRadius: BORDERRADIUS.radius_8,
     },
     cartItemQty:{
         backgroundColor:COLORS.primaryBlackHex,
-        width: 80,
+        width: responsiveScreenWidth(18),
         borderRadius:BORDERRADIUS.radius_10,
         borderWidth:2,
         borderColor: COLORS.primaryOrangeHex,
@@ -234,14 +235,14 @@ const styles = StyleSheet.create({
     cartItemSingleLinearGredint:{
         flexDirection: 'row',
         alignItems: 'center',
-        padding: Spacing.space_12,
+        padding: Spacing.space_15,
         gap: Spacing.space_12,
         borderRadius: BORDERRADIUS.radius_25,
     },
     cartItmSingleImg:{
-        height: 150,
-        width: 150,
-        borderRadius:BORDERRADIUS.radius_20
+        height: responsiveScreenHeight(18),
+        width: responsiveScreenWidth(35),
+        borderRadius:BORDERRADIUS.radius_25
     },
     cartItmSingleInfoContainer:{
         flex: 1,
@@ -256,7 +257,7 @@ const styles = StyleSheet.create({
     },
     cartItmSingleQtyContainer:{
         flexDirection:'row',
-        justifyContent : 'space-evenly',
+        justifyContent : 'space-between',
         alignItems : 'center',
     }
 })

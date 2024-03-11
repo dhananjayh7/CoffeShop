@@ -1,7 +1,7 @@
 import { StyleSheet, Image, View } from 'react-native'
 import React from 'react'
 import { COLORS, Spacing } from '../theme/theme'
-
+import { responsiveFontSize, responsiveScreenHeight, responsiveHeight,responsiveWidth } from 'react-native-responsive-dimensions';
 const ProfilePic = () => {
   return (
     <View style={styles.ImageContainer}>
@@ -12,9 +12,9 @@ const ProfilePic = () => {
 
 const styles = StyleSheet.create({
     ImageContainer:{
-        height:Spacing.space_36,
-        width: Spacing.space_36,
-        borderRadius: Spacing.space_12,
+        height:responsiveHeight(Spacing.space_6),
+        width: responsiveWidth(Spacing.space_12),
+        borderRadius: responsiveWidth(Spacing.space_4),
         borderWidth:2,
         borderColor: COLORS.secondaryDarkGreyHex,
         alignItems:'center',
@@ -22,8 +22,9 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
     },
     imgStyle:{
-        height: Spacing.space_36,
-        width: Spacing.space_36,
+        height: responsiveHeight(Spacing.space_6),
+        width: responsiveWidth(Spacing.space_12),
+        // resizeMode:'center',
     }
 })
 
